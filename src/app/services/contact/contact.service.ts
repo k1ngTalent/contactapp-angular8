@@ -30,7 +30,7 @@ export class ContactService {
       (this.contacts[this.contacts.length - 1]
         ? this.contacts[this.contacts.length - 1].id
         : 0) + 1;
-    this.contacts.push({ id: topId, ...data });
+    this.contacts.push({...data,id: topId});
   }
 
   updateContact(data) {
