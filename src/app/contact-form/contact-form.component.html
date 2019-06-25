@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="contact-form-container">
+    <div class="contact-form__header">{{ type }} Contact</div>
+    <form
+      class="contact-form"
+      #formdata="ngForm"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          [class.is-invalid]="firstname.invalid && firstname.touched"
+          name="firstname"
+          #firstname="ngModel"
+          minlength="4"
+          [(ngModel)]="formModel.firstname"
+          required
+          placeholder="Enter firstname"
+        />
+        <div *ngIf="firstname.errors && (firstname.touched || firstname.dirty)">
+          <small *ngIf="firstname.errors.required" class="text-danger mr-auto"
+            >firstname is required</small
+          >
+          <small *ngIf="firstname.errors.minlength" class="text-danger"
+            >firstname must be at least 4 characters</small
+          >
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          name="lastname"
+          [class.is-invalid]="lastname.invalid && lastname.touched"
+          minlength="4"
+          #lastname="ngModel"
+          [(ngModel)]="formModel.lastname"
+          placeholder="Enter lastname"
+        />
+        <small [class.d-none]="lastname.valid" class="text-danger">
+          lastname must be at least 4 chracters
+        </small>
+      </div>
+
+      <div class="form-group">
+        <input
+          type="tel"
+          class="form-control"
+          name="phone"
+          #phone="ngModel"
+          minlength="10"
+          maxlength="20"
+          [(ngModel)]="formModel.phone"
+          required
+          pattern="[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
+          placeholder="Enter phonenumber"
+        />
+        <div *ngIf="phone.errors && (phone.touched || phone.dirty)">
+          <div>
+            <small *ngIf="phone.errors.required" class="text-danger mr-auto"
+              >phonenumber is required</small
+            >
+          </div>
+
+          <div>
+            <small *ngIf="phone.errors.pattern" class="text-danger mr-auto"
+              >phonenumber is invalid</small
+            >
+          </div>
+          <div>
+            <small *ngIf="phone.errors.minlength" class="text-danger"
+              >phonenumber must be at least 10 characters</small
+            >
+          </div>
+          <div>
+            <small *ngIf="phone.errors.maxlength" class="text-danger"
+              >phonenumber must not exceed 20 characters</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button
+          type="submit"
+          [disabled]="!formdata.valid"
+          class="btn btn-success btn-sm contact-form-action"
+        >
+          {{ type }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

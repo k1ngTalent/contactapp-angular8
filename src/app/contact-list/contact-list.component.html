@@ -1,0 +1,24 @@
+<section>
+  <div class="container">
+    <div class="contactlist">
+      <span class="contactList-header">Contacts</span>
+      <!-- <button class="btn btn-primary">Angular start</button> -->
+      <div *ngFor="let contact of contacts" class="contacts-card">
+        <app-contact
+          [contact]="contact"
+          [deleteContact]="deleteContact"
+          [updateContact]="updateContact"
+        ></app-contact>
+        <!-- <span>{{ contact.name }}</span> -->
+      </div>
+      <div>
+        <button
+          routerLink="/add"
+          class="btn btn-primary btn-sm contactList-addBtn "
+        >
+          Add New Contact
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
